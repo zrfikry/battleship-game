@@ -84,7 +84,6 @@ function render() {
   cheatBoard2.innerHTML = ""
 
   if (isPlaying) {
-    console.clear()
     console.log('Player 1:',playerShipOnBoard.p1)
     console.log('Player 2:',playerShipOnBoard.p2)
     console.log('------------------------------')
