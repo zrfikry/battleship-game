@@ -33,6 +33,7 @@
 
 .box.coordinate-numbering {
   border: none;
+  background: none;
 }
 
 .ship-setter {
