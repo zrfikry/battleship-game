@@ -230,7 +230,6 @@ function startGame () {
 
 function showCheat () {
   isShowCheat = !isShowCheat
-  console.log(isShowCheat)
   render()
 }
 
