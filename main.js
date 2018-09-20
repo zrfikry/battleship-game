@@ -54,6 +54,9 @@ let turn = 'p1'
 let isPlaying = false
 let isShowCheat = false
 
+let turnCount = 0
+
+const turnBox = document.querySelector("#turn")
 const areaP1 = document.querySelector("#areaP1")
 const areaP2 = document.querySelector("#areaP2")
 
@@ -193,13 +196,24 @@ function render() {
     })
   })
 
+  let delay = 0
+  if (turnCount > 0) {
+    delay = 1000
+  }
+
   // hide and display board based on player's turn
   if (isPlaying && turn === 'p1') {
-    areaP1.style.display = 'none'
-    areaP2.style.display = 'block'
+    setTimeout(() => {
+      areaP1.style.display = 'none'
+      areaP2.style.display = 'block'
+      turnBox.innerHTML = playerName.p1 + "'s Turn"
+    }, delay)
   } else if (isPlaying && turn === 'p2'){
-    areaP1.style.display = 'block'
-    areaP2.style.display = 'none'
+    setTimeout(() => {
+      areaP1.style.display = 'block'
+      areaP2.style.display = 'none'
+      turnBox.innerHTML = playerName.p2 + "'s Turn"
+    }, delay)
   }
 
   if (isPlaying && isShowCheat) {
@@ -257,7 +271,7 @@ const setShip = function (player) {
   }
 
   let promptCoordinate = prompt('Set ship start cordinate example: A1')
-  if (promptCoordinate && promptCoordinate.length === 2) {
+  if (promptCoordinate && (promptCoordinate.length > 1 && promptCoordinate.length <= 3)) {
     let ship = playerShiplist[player][shipSelected]
     let x = alphabets.indexOf(promptCoordinate.charAt(0).toUpperCase())
     let y = Number(promptCoordinate.toUpperCase().replace(alphabets[x], ''))
@@ -331,6 +345,7 @@ const launchMissile = function (event) {
         turn = 'p1'
       }
       ammo = defaultAmmo
+      turnCount++
     }
     render()
   } else {
